@@ -1,0 +1,21 @@
+from typing import Dict
+
+execution_time: Dict[str, float] = {}
+def time_decorator(fn):
+
+    """
+    Create a decorator function time_decorator
+    which has to calculate decorated function execution time
+    and put this time value to execution_time dictionary where key is
+    decorated function name and value is this function execution time.
+    """
+    def wrapper_function(*args, **kwargs):
+        from time import time
+        t1 = time()
+        result = fn(*args, **kwargs)
+        t2 = time()
+        t3 = t2-t1
+        global execution_time
+        execution_time = {fn.name: t3}
+        return execution_time
+    return wrapper_function
